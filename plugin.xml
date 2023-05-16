@@ -3,20 +3,19 @@
     xmlns="http://apache.org/cordova/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="cordova-plugin-browsertab"
-    version="0.2.1">
+    version="0.2.2">
     <name>cordova-plugin-browsertab</name>
     <description>
         This plugin provides an interface to in-app browser tabs that exist on
         some mobile platforms, specifically Custom Tabs on Android and
         SFSafariViewController on iOS.
     </description>
-    <dependency id="cordova-plugin-compat" version="^1.0.0" />
 
     <js-module name="BrowserTab" src="www/browsertab.js">
         <clobbers target="cordova.plugins.browsertab" />
     </js-module>
   
-    <preference name="CUSTOM_TAB_COLOR_RGB" default="#ffffff" />
+    <preference name="CUSTOM_TAB_COLOR_RGB" default="#1a73e8" />
   
     <platform name="android">
         <config-file parent="/*" target="res/xml/config.xml">
@@ -28,7 +27,7 @@
         <source-file src="src/android/BrowserTab.java"
             target-dir="src/com/google/cordova/plugin" />
         <framework src="com.android.support:customtabs:23.3.0"/>
-        <framework src="src/android/BrowserTab.gradle" custom="true" type="gradleReference"/>
+<!--         <framework src="src/android/BrowserTab.gradle" custom="true" type="gradleReference"/> -->
   
         <source-file src="src/android/res/browsertab.xml" target-dir="res/values" />
         <config-file target="res/values/browsertab.xml" parent="/*">

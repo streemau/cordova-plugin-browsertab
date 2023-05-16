@@ -20,6 +20,7 @@ import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import androidx.browser.customtabs.CustomTabsIntent;
 import android.util.Log;
+import android.content.ActivityNotFoundException;
 
 import java.util.Iterator;
 import java.util.List;
@@ -113,10 +114,17 @@ public class BrowserTab extends CordovaPlugin {
     customTabsIntentBuilder.setToolbarColor(colorParser.parseColor(tabColor));
 
     // Create Intent
-    CustomTabsIntent customTabsIntent = customTabsIntentBuilder.build();
-
+    Intent customTabsIntent = customTabsIntentBuilder.build().intent;
+    customTabsIntent.setData(Uri.parse(urlStr));
+    customTabsIntent.setPackage("com.android.chrome");
+    try {
+      cordova.getActivity().startActivity(customTabsIntent);
+    } catch (ActivityNotFoundException ex) {
+      customTabsIntent.setPackage(mCustomTabsBrowser);
+      cordova.getActivity().startActivity(customTabsIntent);
+    }
     // Load URL
-    customTabsIntent.launchUrl(cordova.getActivity(), Uri.parse(urlStr));
+    // customTabsIntent.launchUrl(cordova.getActivity(), Uri.parse(urlStr));
 
     Log.d(LOG_TAG, "in app browser call dispatched");
     callbackContext.success();
