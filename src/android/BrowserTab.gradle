@@ -1,7 +1,0 @@
-def minSdkVersion = 16
-
-if(!project.hasProperty('cdvMinSdkVersion')) {
-    ext.cdvMinSdkVersion = minSdkVersion;
-} else if (cdvMinSdkVersion.toInteger() < minSdkVersion) {
-    ext.cdvMinSdkVersion = minSdkVersion;
-}
